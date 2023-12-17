@@ -6,7 +6,7 @@ import './App.css';
 function App() {
 
 	const [state, setState] = useState(Array(9).fill(null))
-	const [currentPlayer, setcurrentplayer] = useState('X')
+	const [currentPlayer, setcurrentplayer] = useState('X');
 
 	const Winningprobablity = [
 		[0, 1, 2],
@@ -18,11 +18,11 @@ function App() {
 		[0, 4, 8],
 		[2, 4, 6],
 	]
+	console.log(state);
 
 	function checkWinner() {
 		for (let i = 0; i < Winningprobablity.length; i++) {
 			const [a, b, c] = Winningprobablity[i]
-			console.log(a, b, c);
 			if (state[a] !== null && state[a] === state[b] && state[a] === state[c]) {
 				return state[a]
 			}
@@ -37,11 +37,12 @@ function App() {
 	const iswinner = checkWinner();
 
 	function handleclick(id) {
-		if (state[id] !== null) {
-			return   //if the box has been clicked already exit immediately from function and dont do anything
-		}
+		
+		if (state[id] !== null) return;  //if the box has been clicked already exit immediately from function and dont do anything
+		
 		setState((prevstate) => {
 			return prevstate.map((item, index) => {
+				console.log(item)
 				if (index === id) {
 					return currentPlayer
 				}
@@ -50,6 +51,7 @@ function App() {
 				}
 			});
 		});
+		
 		setcurrentplayer((prevplayer) => prevplayer === 'X' ? '0' : 'X');
 	}
 
